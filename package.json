@@ -10,8 +10,13 @@
     "type": "git",
     "url": "https://github.com/valerio-vaccaro/node-red-contrib-lightning"
   },
-  "keywords": ["node-red", "lightning", "bitcoin", "blockchain",
-    "cryptocurrency", "payment"
+  "keywords": [
+    "node-red",
+    "lightning",
+    "bitcoin",
+    "blockchain",
+    "cryptocurrency",
+    "payment"
   ],
   "node-red": {
     "nodes": {

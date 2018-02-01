@@ -32,6 +32,20 @@ module.exports = function(RED) {
     var msg = {};
     var node = this;
     this.on("input", function(msg) {
+      const client = new LightningClient('/home/bitcoind/.lightning');
+      
+      client.newaddr()
+        .then(addr => { 
+          this.status({
+            fill: "green",
+            shape: "dot",
+            text: "Done"
+          });
+          msg.payload = addr; 
+          node.send(msg);
+        });
+
+
       // import the file content like Buffer
       /*const stampResultPromise = OpenTimestamps.stamp(msg.fileArray);
       stampResultPromise.then(stampResult => {
