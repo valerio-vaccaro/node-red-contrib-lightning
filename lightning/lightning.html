@@ -15,26 +15,105 @@
 
 
 -->
-
-<script type="text/x-red" data-template-name="lightning_newaddr">
+<!-- GET NEW ADDRESS -->
+<script type="text/x-red" data-template-name="newaddr">
 </script>
 <!-- Next, some simple help text is provided for the node.                   -->
-<script type="text/x-red" data-help-name="lightning_newaddr">
-    <p>Generate the stamp.</p>
+<script type="text/x-red" data-help-name="newaddr">
+    <p>get new address</p>
 </script>
 <!-- Finally, the node type is registered along with all of its properties   -->
 <script type="text/javascript">
-    RED.nodes.registerType('lightning_newaddr',{
+    RED.nodes.registerType('newaddr',{
         category: 'Lightning',      // the palette category
         color:"#A6BBCF",
         defaults: {             // defines the editable properties of the node
-            name: {value:"NewAddr"}   //  along with default values.
+            name: {value:"get new address"}   //  along with default values.
         },
         inputs:1,                // set the number of inputs - only 0 or 1
         outputs:1,               // set the number of outputs - 0 to n
         icon: "arrow-in.png",    // set the icon (held in public/icons)
         label: function() {      // sets the default label contents
-            return this.name||this.topic||"lightning_newaddr";
+            return this.name||this.topic||"newaddr";
+        },
+        labelStyle: function() { // sets the class to apply to the label
+            return this.name?"node_label_italic":"";
+        }
+    });
+</script>
+
+<!-- LIST INVOICES -->
+<script type="text/x-red" data-template-name="listinvoices">
+</script>
+<!-- Next, some simple help text is provided for the node.                   -->
+<script type="text/x-red" data-help-name="listinvoices">
+    <p>list invoices</p>
+</script>
+<!-- Finally, the node type is registered along with all of its properties   -->
+<script type="text/javascript">
+    RED.nodes.registerType('listinvoices',{
+        category: 'Lightning',      // the palette category
+        color:"#A6BBCF",
+        defaults: {             // defines the editable properties of the node
+            name: {value:"list invoices"}   //  along with default values.
+        },
+        inputs:1,                // set the number of inputs - only 0 or 1
+        outputs:1,               // set the number of outputs - 0 to n
+        icon: "arrow-in.png",    // set the icon (held in public/icons)
+        label: function() {      // sets the default label contents
+            return this.name||this.topic||"listinvoices";
+        },
+        labelStyle: function() { // sets the class to apply to the label
+            return this.name?"node_label_italic":"";
+        }
+    });
+</script>
+<!-- WAIT ANY INVOICE -->
+<script type="text/x-red" data-template-name="waitanyinvoice">
+</script>
+<!-- Next, some simple help text is provided for the node.                   -->
+<script type="text/x-red" data-help-name="waitanyinvoice">
+    <p>wait for invoice</p>
+</script>
+<!-- Finally, the node type is registered along with all of its properties   -->
+<script type="text/javascript">
+    RED.nodes.registerType('waitanyinvoice',{
+        category: 'Lightning',      // the palette category
+        color:"#A6BBCF",
+        defaults: {             // defines the editable properties of the node
+            name: {value:"wait for invoice"}   //  along with default values.
+        },
+        inputs:1,                // set the number of inputs - only 0 or 1
+        outputs:1,               // set the number of outputs - 0 to n
+        icon: "arrow-in.png",    // set the icon (held in public/icons)
+        label: function() {      // sets the default label contents
+            return this.name||this.topic||"wait for invoice";
+        },
+        labelStyle: function() { // sets the class to apply to the label
+            return this.name?"node_label_italic":"";
+        }
+    });
+</script>
+<!-- INVOICE -->
+<script type="text/x-red" data-template-name="invoice">
+</script>
+<!-- Next, some simple help text is provided for the node.                   -->
+<script type="text/x-red" data-help-name="invoice">
+    <p>prepare invoice</p>
+</script>
+<!-- Finally, the node type is registered along with all of its properties   -->
+<script type="text/javascript">
+    RED.nodes.registerType('invoice',{
+        category: 'Lightning',      // the palette category
+        color:"#A6BBCF",
+        defaults: {             // defines the editable properties of the node
+            name: {value:"prepare invoice"}   //  along with default values.
+        },
+        inputs:1,                // set the number of inputs - only 0 or 1
+        outputs:1,               // set the number of outputs - 0 to n
+        icon: "arrow-in.png",    // set the icon (held in public/icons)
+        label: function() {      // sets the default label contents
+            return this.name||this.topic||"prepare invoice";
         },
         labelStyle: function() { // sets the class to apply to the label
             return this.name?"node_label_italic":"";
