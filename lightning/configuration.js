@@ -1,8 +1,7 @@
 module.exports = function(RED) {
   function RemoteServerNode(n) {
     RED.nodes.createNode(this, n);
-    this.host = n.host;
-    this.port = n.port;
+    this.path = n.path;
   }
-  RED.nodes.registerType("remote-server", RemoteServerNode);
+  RED.nodes.registerType("lightning-server", RemoteServerNode);
 }

@@ -19,80 +19,104 @@
 
 //import the requirements
 const LightningClient = require('lightning-client');
-const lightning_dir = "/home/satoshi/.lightning";
+const lightning_dir = "";
 
-module.exports = function(RED) {
+module.exports = function (RED) {
   // Node for stamp a Buffer content
   function newaddr(n) {
     RED.nodes.createNode(this, n);
+    this.server = RED.nodes.getNode(n.server);
+    if(this.server){
+      lightning_dir = this.server.path;
+    }else{
+      lightning_dir = "";
+    }
     var node = this;
-    this.on("input", function(msg) {
+    this.on("input", function (msg) {
       const client = new LightningClient(lightning_dir);
       client.newaddr()
-        .then(result => { 
-          msg.payload = result; 
+        .then(result => {
+          msg.payload = result;
           node.send(msg);
         })
-	.catch(error => {
-         console.log(error);
-         msg.payload = error;
-         node.send(msg);
+        .catch(error => {
+          console.log(error);
+          msg.payload = error;
+          node.send(msg);
         });
     });
   };
 
   function listinvoices(n) {
     RED.nodes.createNode(this, n);
+    this.server = RED.nodes.getNode(n.server);
+    if (this.server) {
+      lightning_dir = this.server.path;
+    } else {
+      lightning_dir = "";
+    }
     var node = this;
-    this.on("input", function(msg) {
+    this.on("input", function (msg) {
       const client = new LightningClient(lightning_dir);
       client.listinvoices()
         .then(result => {
           msg.payload = result;
           node.send(msg);
         })
-	.catch(error => {
-         console.log(error);
-         msg.payload = error;
-         node.send(msg);
+        .catch(error => {
+          console.log(error);
+          msg.payload = error;
+          node.send(msg);
         });
     });
   };
 
- function waitanyinvoice(n) {
+  function waitanyinvoice(n) {
     RED.nodes.createNode(this, n);
+    this.server = RED.nodes.getNode(n.server);
+    if (this.server) {
+      lightning_dir = this.server.path;
+    } else {
+      lightning_dir = "";
+    }
     var node = this;
-    this.on("input", function(msg) {
+    this.on("input", function (msg) {
       const client = new LightningClient(lightning_dir);
       client.waitanyinvoice(msg.id)
         .then(result => {
           msg.payload = result;
           node.send(msg);
         })
-	.catch(error => {
-         console.log(error);
-         msg.payload = error;
-         node.send(msg);
+        .catch(error => {
+          console.log(error);
+          msg.payload = error;
+          node.send(msg);
         });
     });
   };
 
- function invoice(n) {
+  function invoice(n) {
     RED.nodes.createNode(this, n);
+    this.server = RED.nodes.getNode(n.server);
+    if (this.server) {
+      lightning_dir = this.server.path;
+    } else {
+      lightning_dir = "";
+    }
     var node = this;
-    this.on("input", function(msg) {
+    this.on("input", function (msg) {
       const client = new LightningClient(lightning_dir);
       client.invoice(msg.msatoshi, msg.label, msg.description, msg.expiry)
         .then(result => {
-	  console.log(result);
+          console.log(result);
           msg.payload = result;
           node.send(msg);
         })
         .catch(error => {
-	 console.log(error);
-	 msg.payload = error;
-	 node.send(msg);
-	});
+          console.log(error);
+          msg.payload = error;
+          node.send(msg);
+        });
     });
   };
 
