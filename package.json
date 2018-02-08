@@ -1,8 +1,8 @@
 {
   "name": "node-red-contrib-lightning",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
-  "author": "Valerio Vaccaro <valerio.vaccaro@gmail.com>",
+  "author": "Valerio Vaccaro <valerio.vaccaro@gmail.com>, Gianluca Mazza <gianluca@bhb.network>",
   "dependencies": {
     "lightning-client": "^0.5.2-beta.6"
   },

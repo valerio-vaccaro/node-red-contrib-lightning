@@ -1,21 +1,19 @@
 /**
- RED.nodes.registerType("lightning.js
- *
- *
- RED.nodes.registerType("Copyright 2018 Valerio Vaccaro - www.valeriovaccaro.it
- *
- RED.nodes.registerType("Licensed under the Apache License, Version 2.0 (the "License");
- RED.nodes.registerType("you may not use this file except in compliance with the License.
- RED.nodes.registerType("You may obtain a copy of the License at
- *
- RED.nodes.registerType("http://www.apache.org/licenses/LICENSE-2.0
- *
- RED.nodes.registerType("Unless required by applicable law or agreed to in writing, software
- RED.nodes.registerType("distributed under the License is distributed on an "AS IS" BASIS,
- RED.nodes.registerType("WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- RED.nodes.registerType("See the License for the specific language governing permissions and
- RED.nodes.registerType("limitations under the License.
- **/
+ *   Copyright 2018 Valerio Vaccaro - www.valeriovaccaro.it
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+ */
 
 //import the requirements
 const LightningClient = require('lightning-client');
@@ -29,7 +27,7 @@ module.exports = function (RED) {
     this.path = n.path;
   }
 
-  // Node for stamp a Buffer content
+  // function: newaddress
   function newaddr(n) {
     RED.nodes.createNode(this, n);
     var lightning_dir = "";
@@ -55,6 +53,7 @@ module.exports = function (RED) {
     });
   };
 
+  // function: listinvoices
   function listinvoices(n) {
     RED.nodes.createNode(this, n);
     var lightning_dir = "";
@@ -80,6 +79,7 @@ module.exports = function (RED) {
     });
   };
 
+  // function: waitanyinvoice
   function waitanyinvoice(n) {
     RED.nodes.createNode(this, n);
     var lightning_dir = "";
@@ -105,6 +105,7 @@ module.exports = function (RED) {
     });
   };
 
+  // function: invoice
   function invoice(n) {
     RED.nodes.createNode(this, n);
     var lightning_dir = "";
@@ -131,6 +132,7 @@ module.exports = function (RED) {
     });
   };
 
+  // function: dev-blockheight
   function devBlockheight(n) {
     RED.nodes.createNode(this, n);
     var lightning_dir = "";
@@ -156,6 +158,187 @@ module.exports = function (RED) {
     });
   };
 
+  // function: dev-setfees
+  function devSetfees(n) {
+    RED.nodes.createNode(this, n);
+    var lightning_dir = "";
+    var server = RED.nodes.getNode(n.server);
+    if (server) {
+      lightning_dir = server.path;
+    } else {
+      lightning_dir = "";
+    }
+    var node = this;
+    this.on("input", function (msg) {
+      const client = new LightningClient(lightning_dir);
+      client.devSetfees(msg.immediate,msg.normal,msg.slow)
+        .then(result => {
+          msg.payload = result;
+          node.send(msg);
+        })
+        .catch(error => {
+          console.log(error);
+          msg.payload = error;
+          node.send(msg);
+        });
+    });
+  };
+
+  // function: listnodes
+  function listnodes(n) {
+    RED.nodes.createNode(this, n);
+    var lightning_dir = "";
+    var server = RED.nodes.getNode(n.server);
+    if (server) {
+      lightning_dir = server.path;
+    } else {
+      lightning_dir = "";
+    }
+    var node = this;
+    this.on("input", function (msg) {
+      const client = new LightningClient(lightning_dir);
+      client.listnodes()
+        .then(result => {
+          msg.payload = result;
+          node.send(msg);
+        })
+        .catch(error => {
+          console.log(error);
+          msg.payload = error;
+          node.send(msg);
+        });
+    });
+  };
+
+  // function: getroute
+  function getroute(n) {
+    RED.nodes.createNode(this, n);
+    var lightning_dir = "";
+    var server = RED.nodes.getNode(n.server);
+    if (server) {
+      lightning_dir = server.path;
+    } else {
+      lightning_dir = "";
+    }
+    var node = this;
+    this.on("input", function (msg) {
+      const client = new LightningClient(lightning_dir);
+      client.getroute(msg.id,msg.msatoshi,msg.riskfactor,msg.cltv)
+        .then(result => {
+          msg.payload = result;
+          node.send(msg);
+        })
+        .catch(error => {
+          console.log(error);
+          msg.payload = error;
+          node.send(msg);
+        });
+    });
+  };
+
+  // function: listchannels
+  function listchannels(n) {
+    RED.nodes.createNode(this, n);
+    var lightning_dir = "";
+    var server = RED.nodes.getNode(n.server);
+    if (server) {
+      lightning_dir = server.path;
+    } else {
+      lightning_dir = "";
+    }
+    var node = this;
+    this.on("input", function (msg) {
+      const client = new LightningClient(lightning_dir);
+      client.listchannels()
+        .then(result => {
+          msg.payload = result;
+          node.send(msg);
+        })
+        .catch(error => {
+          console.log(error);
+          msg.payload = error;
+          node.send(msg);
+        });
+    });
+  };
+
+  // function: delinvoice
+  function delinvoice(n) {
+    RED.nodes.createNode(this, n);
+    var lightning_dir = "";
+    var server = RED.nodes.getNode(n.server);
+    if (server) {
+      lightning_dir = server.path;
+    } else {
+      lightning_dir = "";
+    }
+    var node = this;
+    this.on("input", function (msg) {
+      const client = new LightningClient(lightning_dir);
+      client.delinvoice(msg.label,msg.status)
+        .then(result => {
+          msg.payload = result;
+          node.send(msg);
+        })
+        .catch(error => {
+          console.log(error);
+          msg.payload = error;
+          node.send(msg);
+        });
+    });
+  };
+
+  // function: waitinvoice
+  function waitinvoice(n) {
+    RED.nodes.createNode(this, n);
+    var lightning_dir = "";
+    var server = RED.nodes.getNode(n.server);
+    if (server) {
+      lightning_dir = server.path;
+    } else {
+      lightning_dir = "";
+    }
+    var node = this;
+    this.on("input", function (msg) {
+      const client = new LightningClient(lightning_dir);
+      client.waitinvoice(msg.label)
+        .then(result => {
+          msg.payload = result;
+          node.send(msg);
+        })
+        .catch(error => {
+          console.log(error);
+          msg.payload = error;
+          node.send(msg);
+        });
+    });
+  };
+
+  // function: decodepay
+  function decodepay(n) {
+    RED.nodes.createNode(this, n);
+    var lightning_dir = "";
+    var server = RED.nodes.getNode(n.server);
+    if (server) {
+      lightning_dir = server.path;
+    } else {
+      lightning_dir = "";
+    }
+    var node = this;
+    this.on("input", function (msg) {
+      const client = new LightningClient(lightning_dir);
+      client.decodepay(msg.bolt11,msg.description)
+        .then(result => {
+          msg.payload = result;
+          node.send(msg);
+        })
+        .catch(error => {
+          console.log(error);
+          msg.payload = error;
+          node.send(msg);
+        });
+    });
+  };
 
   // Register the node by name. This must be called before overriding any of the
   // Node functions.
@@ -165,15 +348,19 @@ module.exports = function (RED) {
   RED.nodes.registerType("waitanyinvoice", waitanyinvoice);
   RED.nodes.registerType("invoice", invoice);
   RED.nodes.registerType("dev-blockheight", devBlockheight);
+  RED.nodes.registerType("dev-setfees", devSetfees);
+  RED.nodes.registerType("listnodes", listnodes);
+  RED.nodes.registerType("getroute", getroute);
+  RED.nodes.registerType("listchannels", listchannels);
+  RED.nodes.registerType("delinvoice", delinvoice);
+  RED.nodes.registerType("waitinvoice", waitinvoice);
+  RED.nodes.registerType("decodepay", decodepay);
+  
+  
+  
   /*
+TODO
 
-  RED.nodes.registerType("dev-setfees", dev-setfees);
-RED.nodes.registerType("listnodes", listnodes);
-RED.nodes.registerType("getroute", getroute);
-RED.nodes.registerType("listchannels", listchannels);
-RED.nodes.registerType("delinvoice", delinvoice);
-RED.nodes.registerType("waitinvoice", waitinvoice);
-RED.nodes.registerType("decodepay", decodepay);
 RED.nodes.registerType("help", help);
 RED.nodes.registerType("stop", stop);
 RED.nodes.registerType("getlog", getlog);
