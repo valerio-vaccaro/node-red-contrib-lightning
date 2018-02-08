@@ -131,7 +131,7 @@ module.exports = function (RED) {
     });
   };
 
-  function dev_blockheight(n) {
+  function devBlockheight(n) {
     RED.nodes.createNode(this, n);
     var lightning_dir = "";
     var server = RED.nodes.getNode(n.server);
@@ -143,7 +143,7 @@ module.exports = function (RED) {
     var node = this;
     this.on("input", function (msg) {
       const client = new LightningClient(lightning_dir);
-      client.prototype['dev-blockheight']()
+      client.devBlockheight()
         .then(result => {
           msg.payload = result;
           node.send(msg);
@@ -164,7 +164,7 @@ module.exports = function (RED) {
   RED.nodes.registerType("listinvoices", listinvoices);
   RED.nodes.registerType("waitanyinvoice", waitanyinvoice);
   RED.nodes.registerType("invoice", invoice);
-  RED.nodes.registerType("dev-blockheight", dev_blockheight);
+  RED.nodes.registerType("dev-blockheight", devBlockheight);
   /*
 
   RED.nodes.registerType("dev-setfees", dev-setfees);
