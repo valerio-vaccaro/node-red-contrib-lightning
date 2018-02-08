@@ -4,7 +4,7 @@
   "description": "",
   "author": "Valerio Vaccaro <valerio.vaccaro@gmail.com>",
   "dependencies": {
-    "lightning-client": "latest"
+    "lightning-client": "^0.5.2-beta.6"
   },
   "repository": {
     "type": "git",

@@ -29,9 +29,14 @@ module.exports = function(RED) {
     this.on("input", function(msg) {
       const client = new LightningClient(lightning_dir);
       client.newaddr()
-        .then(addr => { 
-          msg.payload = addr; 
+        .then(result => { 
+          msg.payload = result; 
           node.send(msg);
+        })
+	.catch(error => {
+         console.log(error);
+         msg.payload = error;
+         node.send(msg);
         });
     });
   };
@@ -42,9 +47,14 @@ module.exports = function(RED) {
     this.on("input", function(msg) {
       const client = new LightningClient(lightning_dir);
       client.listinvoices()
-        .then(addr => {
-          msg.payload = addr;
+        .then(result => {
+          msg.payload = result;
           node.send(msg);
+        })
+	.catch(error => {
+         console.log(error);
+         msg.payload = error;
+         node.send(msg);
         });
     });
   };
@@ -55,9 +65,14 @@ module.exports = function(RED) {
     this.on("input", function(msg) {
       const client = new LightningClient(lightning_dir);
       client.waitanyinvoice(msg.id)
-        .then(addr => {
-          msg.payload = addr;
+        .then(result => {
+          msg.payload = result;
           node.send(msg);
+        })
+	.catch(error => {
+         console.log(error);
+         msg.payload = error;
+         node.send(msg);
         });
     });
   };
@@ -67,13 +82,17 @@ module.exports = function(RED) {
     var node = this;
     this.on("input", function(msg) {
       const client = new LightningClient(lightning_dir);
-      console.log(msg);
-      client.invoice(msg.msatoshi,msg.label)
-        .then(addr => {
-	  console.log(addr);
-          msg.payload = addr;
+      client.invoice(msg.msatoshi, msg.label, msg.description, msg.expiry)
+        .then(result => {
+	  console.log(result);
+          msg.payload = result;
           node.send(msg);
-        });
+        })
+        .catch(error => {
+	 console.log(error);
+	 msg.payload = error;
+	 node.send(msg);
+	});
     });
   };
 
