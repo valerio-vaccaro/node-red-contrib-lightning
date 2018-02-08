@@ -19,7 +19,7 @@
 
 //import the requirements
 const LightningClient = require('lightning-client');
-var lightning_dir = "";
+
 
 module.exports = function (RED) {
 
@@ -32,9 +32,10 @@ module.exports = function (RED) {
   // Node for stamp a Buffer content
   function newaddr(n) {
     RED.nodes.createNode(this, n);
-    this.server = RED.nodes.getNode(n.server);
-    if(this.server){
-      lightning_dir = this.server.path;
+    var lightning_dir = "";
+    var server = RED.nodes.getNode(n.server);
+    if(server){
+      lightning_dir = server.path;
     }else{
       lightning_dir = "";
     }
@@ -56,9 +57,10 @@ module.exports = function (RED) {
 
   function listinvoices(n) {
     RED.nodes.createNode(this, n);
-    this.server = RED.nodes.getNode(n.server);
-    if (this.server) {
-      lightning_dir = this.server.path;
+    var lightning_dir = "";
+    var server = RED.nodes.getNode(n.server);
+    if (server) {
+      lightning_dir = server.path;
     } else {
       lightning_dir = "";
     }
@@ -80,9 +82,10 @@ module.exports = function (RED) {
 
   function waitanyinvoice(n) {
     RED.nodes.createNode(this, n);
-    this.server = RED.nodes.getNode(n.server);
-    if (this.server) {
-      lightning_dir = this.server.path;
+    var lightning_dir = "";
+    var server = RED.nodes.getNode(n.server);
+    if (server) {
+      lightning_dir = server.path;
     } else {
       lightning_dir = "";
     }
@@ -104,9 +107,10 @@ module.exports = function (RED) {
 
   function invoice(n) {
     RED.nodes.createNode(this, n);
-    this.server = RED.nodes.getNode(n.server);
-    if (this.server) {
-      lightning_dir = this.server.path;
+    var lightning_dir = "";
+    var server = RED.nodes.getNode(n.server);
+    if (server) {
+      lightning_dir = server.path;
     } else {
       lightning_dir = "";
     }
