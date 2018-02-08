@@ -19,7 +19,7 @@
 
 //import the requirements
 const LightningClient = require('lightning-client');
-const lightning_dir = "";
+var lightning_dir = "";
 
 module.exports = function (RED) {
   // Node for stamp a Buffer content
