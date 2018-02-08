@@ -15,6 +15,26 @@
 
 
 -->
+<!-- CONFIGURATION -->
+<script type="text/javascript">
+    RED.nodes.registerType('lightning-server', {
+        category: 'config',
+        defaults: {
+            path: { value: "/root/.lightning/", required: true }
+        },
+        label: function () {
+            return this.path;
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="lightning-server">
+    <div class="form-row">
+        <label for="node-config-input-path"><i class="icon-bookmark"></i> Path</label>
+        <input type="text" id="node-config-input-path">
+    </div>
+</script>
+
 <!-- GET NEW ADDRESS -->
 <script type="text/x-red" data-template-name="newaddr">
     <div class="form-row">

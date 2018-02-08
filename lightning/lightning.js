@@ -22,6 +22,13 @@ const LightningClient = require('lightning-client');
 var lightning_dir = "";
 
 module.exports = function (RED) {
+
+  // server configuration
+  function RemoteServerNode(n) {
+    RED.nodes.createNode(this, n);
+    this.path = n.path;
+  }
+
   // Node for stamp a Buffer content
   function newaddr(n) {
     RED.nodes.createNode(this, n);
@@ -122,6 +129,7 @@ module.exports = function (RED) {
 
   // Register the node by name. This must be called before overriding any of the
   // Node functions.
+  RED.nodes.registerType("lightning-server", RemoteServerNode);
   RED.nodes.registerType("newaddr", newaddr);
   RED.nodes.registerType("listinvoices", listinvoices);
   RED.nodes.registerType("waitanyinvoice", waitanyinvoice);
